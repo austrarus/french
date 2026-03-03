@@ -1,0 +1,1772 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mon Français 🇫🇷</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #2563eb;
+    --blue-light: #dbeafe;
+    --blue-mid: #93c5fd;
+    --red: #ef4444;
+    --red-light: #fee2e2;
+    --green: #22c55e;
+    --green-light: #dcfce7;
+    --yellow: #f59e0b;
+    --yellow-light: #fef3c7;
+    --purple: #8b5cf6;
+    --purple-light: #ede9fe;
+    --orange: #f97316;
+    --orange-light: #ffedd5;
+    --bg: #f0f4ff;
+    --card: #ffffff;
+    --text: #1e293b;
+    --muted: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 4px 20px rgba(37,99,235,0.10);
+    --radius: 18px;
+    --radius-sm: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  .screen { display: none; animation: fadeIn .35s ease; }
+  .screen.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  /* ===== HEADER ===== */
+  .app-header {
+    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 60%, #3b82f6 100%);
+    color: #fff;
+    padding: 18px 28px 14px;
+    display: flex; align-items: center; gap: 14px;
+    box-shadow: 0 4px 18px rgba(37,99,235,0.25);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .app-header .logo { font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800; letter-spacing: -1px; }
+  .app-header .flag { font-size: 1.8rem; }
+  .app-header .breadcrumb { margin-left: auto; font-size: .85rem; opacity: .85; display: flex; align-items: center; gap: 6px; }
+  .breadcrumb span { cursor: pointer; }
+  .breadcrumb span:hover { text-decoration: underline; }
+  .back-btn {
+    background: rgba(255,255,255,.18); border: none; color: #fff;
+    padding: 7px 16px; border-radius: 30px; cursor: pointer;
+    font-family: 'Nunito', sans-serif; font-size: .92rem; font-weight: 700;
+    display: flex; align-items: center; gap: 6px; transition: background .2s;
+  }
+  .back-btn:hover { background: rgba(255,255,255,.30); }
+
+  /* ===== MAIN CONTAINER ===== */
+  .main { max-width: 900px; margin: 0 auto; padding: 36px 20px 60px; }
+
+  /* ===== HOME ===== */
+  .home-hero {
+    text-align: center; padding: 40px 0 30px;
+  }
+  .home-hero h1 { font-family: 'Baloo 2', cursive; font-size: 2.8rem; font-weight: 800; color: var(--blue); line-height: 1.15; }
+  .home-hero p { color: var(--muted); font-size: 1.1rem; margin-top: 8px; }
+  .home-cards {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 36px;
+  }
+  .home-card {
+    background: var(--card); border-radius: var(--radius); padding: 36px 28px;
+    box-shadow: var(--shadow); cursor: pointer; border: 2.5px solid transparent;
+    transition: transform .22s, border-color .22s, box-shadow .22s;
+    display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center;
+  }
+  .home-card:hover { transform: translateY(-6px); box-shadow: 0 10px 36px rgba(37,99,235,0.18); border-color: var(--blue); }
+  .home-card .card-icon { font-size: 3.2rem; }
+  .home-card h2 { font-family: 'Baloo 2', cursive; font-size: 1.45rem; font-weight: 800; color: var(--text); }
+  .home-card p { color: var(--muted); font-size: .95rem; }
+  .home-card.lex { border-top: 5px solid var(--blue); }
+  .home-card.conj { border-top: 5px solid var(--purple); }
+
+  /* ===== LESSON LIST ===== */
+  .section-title { font-family: 'Baloo 2', cursive; font-size: 1.9rem; font-weight: 800; color: var(--blue); margin-bottom: 6px; }
+  .section-sub { color: var(--muted); margin-bottom: 26px; }
+  .lesson-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .lesson-card {
+    background: var(--card); border-radius: var(--radius); padding: 22px 22px 18px;
+    box-shadow: var(--shadow); cursor: pointer; border: 2.5px solid var(--border);
+    transition: transform .2s, border-color .2s, box-shadow .2s;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .lesson-card:hover { transform: translateY(-4px); border-color: var(--blue); box-shadow: 0 8px 28px rgba(37,99,235,.15); }
+  .lesson-num {
+    width: 44px; height: 44px; border-radius: 50%; background: var(--blue-light);
+    color: var(--blue); display: flex; align-items: center; justify-content: center;
+    font-family: 'Baloo 2', cursive; font-weight: 800; font-size: 1.1rem; flex-shrink: 0;
+  }
+  .lesson-card h3 { font-size: 1rem; font-weight: 700; color: var(--text); }
+  .lesson-card span { font-size: .82rem; color: var(--muted); }
+
+  /* ===== LESSON MENU ===== */
+  .lesson-menu-title { font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800; color: var(--blue); margin-bottom: 6px; }
+  .lesson-menu-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; margin-top: 28px; }
+  .lm-card {
+    background: var(--card); border-radius: var(--radius); padding: 34px 18px 28px;
+    box-shadow: var(--shadow); cursor: pointer; text-align: center;
+    border: 2.5px solid var(--border); transition: transform .2s, border-color .2s, box-shadow .2s;
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+  }
+  .lm-card:hover { transform: translateY(-6px); box-shadow: 0 10px 30px rgba(0,0,0,.10); }
+  .lm-card .lm-icon { font-size: 2.6rem; }
+  .lm-card h3 { font-family: 'Baloo 2', cursive; font-size: 1.25rem; font-weight: 800; }
+  .lm-card p { font-size: .88rem; color: var(--muted); }
+  .lm-card.vocab { border-top: 5px solid var(--blue); }
+  .lm-card.learn { border-top: 5px solid var(--green); }
+  .lm-card.play { border-top: 5px solid var(--yellow); }
+
+  /* ===== VOCABULARY TABLE ===== */
+  .vocab-table-wrap { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+  .vocab-table { width: 100%; border-collapse: collapse; }
+  .vocab-table th {
+    background: var(--blue); color: #fff; padding: 13px 16px; font-size: .92rem;
+    font-weight: 700; text-align: left;
+  }
+  .vocab-table td { padding: 11px 16px; border-bottom: 1px solid var(--border); font-size: .96rem; vertical-align: middle; }
+  .vocab-table tr:last-child td { border-bottom: none; }
+  .vocab-table tr:hover td { background: var(--blue-light); }
+  .fr-word { font-weight: 700; color: var(--blue); cursor: pointer; position: relative; display: inline-block; }
+  .word-img-tooltip {
+    display: none; position: absolute; left: 0; top: 110%; z-index: 200;
+    background: #fff; border: 2px solid var(--blue); border-radius: 12px;
+    padding: 8px; box-shadow: 0 8px 28px rgba(37,99,235,.18);
+    min-width: 120px; text-align: center;
+  }
+  .word-img-tooltip img { max-width: 110px; max-height: 90px; border-radius: 8px; object-fit: cover; }
+  .word-img-tooltip .no-img { font-size: .8rem; color: var(--muted); padding: 18px 10px; }
+  .fr-word:hover .word-img-tooltip { display: block; }
+  .speak-btn {
+    background: var(--blue-light); border: none; color: var(--blue); border-radius: 50%;
+    width: 34px; height: 34px; cursor: pointer; font-size: 1.1rem; display: inline-flex;
+    align-items: center; justify-content: center; transition: background .2s; margin-left: 6px;
+  }
+  .speak-btn:hover { background: var(--blue); color: #fff; }
+  .upload-img-btn {
+    background: var(--border); border: none; color: var(--muted); border-radius: 8px;
+    padding: 5px 11px; cursor: pointer; font-size: .8rem; font-family: 'Nunito', sans-serif;
+    font-weight: 600; transition: background .2s; white-space: nowrap;
+  }
+  .upload-img-btn:hover { background: var(--blue-light); color: var(--blue); }
+  .upload-input { display: none; }
+  .learn-check { width: 20px; height: 20px; cursor: pointer; accent-color: var(--blue); }
+
+  /* ===== FLASHCARD ===== */
+  .flashcard-wrap { max-width: 500px; margin: 0 auto; text-align: center; }
+  .flashcard-progress { display: flex; gap: 6px; justify-content: center; margin-bottom: 22px; flex-wrap: wrap; }
+  .fc-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--border); transition: background .3s; }
+  .fc-dot.done { background: var(--green); }
+  .fc-dot.active { background: var(--blue); }
+  .flashcard {
+    background: var(--card); border-radius: 28px; padding: 38px 30px 30px;
+    box-shadow: 0 8px 40px rgba(37,99,235,.13); min-height: 340px;
+    display: flex; flex-direction: column; align-items: center; gap: 18px; position: relative;
+    border: 2.5px solid var(--blue-mid);
+  }
+  .fc-img-area {
+    width: 200px; height: 160px; border-radius: 16px; overflow: hidden;
+    background: var(--blue-light); display: flex; align-items: center; justify-content: center;
+    font-size: 4.5rem;
+  }
+  .fc-img-area img { width: 100%; height: 100%; object-fit: cover; }
+  .fc-word { font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800; color: var(--blue); }
+  .fc-translation { font-size: 1.2rem; color: var(--muted); font-weight: 600; }
+  .fc-known-label { display: flex; align-items: center; gap: 8px; font-size: .92rem; color: var(--muted); cursor: pointer; margin-top: 8px; }
+  .fc-known-label input { width: 18px; height: 18px; accent-color: var(--green); cursor: pointer; }
+  .fc-nav { display: flex; gap: 16px; justify-content: center; margin-top: 22px; }
+  .fc-btn {
+    background: var(--card); border: 2.5px solid var(--border); color: var(--text);
+    padding: 11px 28px; border-radius: 30px; font-family: 'Nunito', sans-serif;
+    font-weight: 700; font-size: 1rem; cursor: pointer; transition: all .2s;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .fc-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-light); }
+  .fc-btn.primary { background: var(--blue); color: #fff; border-color: var(--blue); }
+  .fc-btn.primary:hover { background: #1d4ed8; }
+  .speak-big-btn {
+    background: var(--blue); border: none; color: #fff; border-radius: 50%;
+    width: 52px; height: 52px; cursor: pointer; font-size: 1.5rem;
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 14px rgba(37,99,235,.35); transition: transform .2s;
+  }
+  .speak-big-btn:hover { transform: scale(1.12); }
+
+  /* ===== GAME MENU ===== */
+  .game-menu-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 28px; }
+  .gm-card {
+    background: var(--card); border-radius: var(--radius); padding: 36px 24px;
+    box-shadow: var(--shadow); cursor: pointer; text-align: center;
+    border: 2.5px solid var(--border); transition: transform .2s, border-color .2s;
+    display: flex; flex-direction: column; align-items: center; gap: 14px;
+  }
+  .gm-card:hover { transform: translateY(-6px); border-color: var(--yellow); box-shadow: 0 10px 30px rgba(245,158,11,.18); }
+  .gm-card .gm-icon { font-size: 3rem; }
+  .gm-card h3 { font-family: 'Baloo 2', cursive; font-size: 1.35rem; font-weight: 800; }
+  .gm-card p { font-size: .9rem; color: var(--muted); }
+
+  /* ===== GAME: TROUVE LA TRADUCTION (drag-drop) ===== */
+  .game-dd-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
+  .dd-col-title { font-family: 'Baloo 2', cursive; font-size: 1rem; font-weight: 800; color: var(--muted); margin-bottom: 10px; text-transform: uppercase; letter-spacing: .5px; }
+  .dd-fr-item {
+    border-radius: 12px; padding: 14px 18px; margin-bottom: 10px; font-weight: 700;
+    font-size: 1.05rem; color: #fff; cursor: default; box-shadow: 0 2px 8px rgba(0,0,0,.10);
+    display: flex; align-items: center; min-height: 52px;
+  }
+  .dd-target {
+    border-radius: 12px; padding: 0; margin-bottom: 10px; min-height: 52px;
+    border: 2.5px dashed var(--border); display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; color: var(--muted); transition: border-color .2s, background .2s;
+    position: relative;
+  }
+  .dd-target.over { border-color: var(--blue); background: var(--blue-light); }
+  .dd-target.correct { border-color: var(--green); background: var(--green-light); color: var(--text); font-weight: 700; }
+  .dd-target.wrong { border-color: var(--red); background: var(--red-light); animation: shake .3s; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+  .dd-pool { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .dd-word {
+    background: var(--card); border: 2.5px solid var(--border); border-radius: 10px;
+    padding: 10px 18px; font-weight: 700; font-size: .98rem; cursor: grab;
+    transition: box-shadow .2s, border-color .2s; user-select: none;
+    box-shadow: 0 2px 8px rgba(0,0,0,.06);
+  }
+  .dd-word:hover { border-color: var(--blue); box-shadow: 0 4px 14px rgba(37,99,235,.15); }
+  .dd-word.dragging { opacity: .5; cursor: grabbing; }
+  .check-btn {
+    background: var(--blue); color: #fff; border: none; border-radius: 30px;
+    padding: 13px 36px; font-family: 'Nunito', sans-serif; font-size: 1.1rem;
+    font-weight: 800; cursor: pointer; margin-top: 26px; transition: background .2s;
+    display: block; box-shadow: 0 4px 16px rgba(37,99,235,.25);
+  }
+  .check-btn:hover { background: #1d4ed8; }
+
+  /* ===== GAME: QU'EST-CE QUE C'EST ===== */
+  .quest-card {
+    background: var(--card); border-radius: 24px; padding: 34px 28px;
+    box-shadow: var(--shadow); max-width: 480px; margin: 0 auto; text-align: center;
+    border: 2.5px solid var(--blue-mid);
+  }
+  .quest-img {
+    width: 180px; height: 150px; border-radius: 16px; overflow: hidden;
+    background: var(--blue-light); display: flex; align-items: center; justify-content: center;
+    font-size: 4rem; margin: 0 auto 20px;
+  }
+  .quest-img img { width: 100%; height: 100%; object-fit: cover; }
+  .quest-row { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+  .quest-label { font-family: 'Baloo 2', cursive; font-size: 1.4rem; font-weight: 700; color: var(--text); }
+  .quest-input {
+    border: 2.5px solid var(--border); border-radius: 10px; padding: 10px 14px;
+    font-family: 'Nunito', sans-serif; font-size: 1.1rem; font-weight: 700;
+    color: var(--blue); outline: none; width: 90px; transition: border-color .2s;
+    text-align: center;
+  }
+  .quest-input.word { width: 160px; }
+  .quest-input:focus { border-color: var(--blue); }
+  .quest-input.correct { border-color: var(--green); background: var(--green-light); }
+  .quest-input.wrong { border-color: var(--red); background: var(--red-light); animation: shake .3s; }
+  .quest-score { font-size: 1.05rem; font-weight: 700; color: var(--muted); margin-bottom: 14px; }
+
+  /* ===== CONJUGATION ===== */
+  .conj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .conj-verb-card {
+    background: var(--card); border-radius: var(--radius); padding: 18px 16px;
+    box-shadow: var(--shadow); cursor: pointer; border: 2.5px solid var(--border);
+    transition: transform .2s, border-color .2s; text-align: center;
+  }
+  .conj-verb-card:hover { transform: translateY(-4px); border-color: var(--purple); box-shadow: 0 8px 22px rgba(139,92,246,.15); }
+  .conj-verb-card .verb-fr { font-family: 'Baloo 2', cursive; font-size: 1.2rem; font-weight: 800; color: var(--purple); }
+  .conj-verb-card .verb-ru { font-size: .88rem; color: var(--muted); margin-top: 4px; }
+  .conj-table-wrap { background: var(--card); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; max-width: 500px; margin: 0 auto; }
+  .conj-verb-title { font-family: 'Baloo 2', cursive; font-size: 2rem; font-weight: 800; color: var(--purple); text-align: center; margin-bottom: 20px; }
+  .conj-tense-label { text-align: center; font-size: .9rem; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; font-weight: 700; margin-bottom: 12px; }
+  .conj-table { width: 100%; border-collapse: collapse; }
+  .conj-table th { background: var(--purple); color: #fff; padding: 12px 18px; font-size: .92rem; font-weight: 700; text-align: left; }
+  .conj-table td { padding: 11px 18px; border-bottom: 1px solid var(--border); font-size: .98rem; }
+  .conj-table tr:last-child td { border-bottom: none; }
+  .conj-table .pronoun { color: var(--muted); font-weight: 600; }
+  .conj-table .form { font-weight: 700; color: var(--purple); }
+
+  /* ===== TOAST ===== */
+  .toast {
+    position: fixed; bottom: 28px; right: 28px; z-index: 999;
+    padding: 14px 24px; border-radius: 16px; font-weight: 700; font-size: 1rem;
+    box-shadow: 0 8px 28px rgba(0,0,0,.15); animation: toastIn .3s ease;
+    display: none;
+  }
+  .toast.show { display: block; }
+  .toast.success { background: var(--green); color: #fff; }
+  .toast.error { background: var(--red); color: #fff; }
+  @keyframes toastIn { from { opacity:0; transform: translateY(20px); } to { opacity:1; transform: none; } }
+
+  /* ===== RESULT BANNER ===== */
+  .result-banner {
+    border-radius: 16px; padding: 22px 28px; margin-bottom: 22px; text-align: center;
+    font-family: 'Baloo 2', cursive; font-size: 1.4rem; font-weight: 800;
+  }
+  .result-banner.success { background: var(--green-light); color: #15803d; border: 2px solid var(--green); }
+  .result-banner.error { background: var(--red-light); color: #b91c1c; border: 2px solid var(--red); }
+
+  /* Responsive */
+  @media(max-width:640px) {
+    .home-cards, .lesson-grid, .lesson-menu-cards, .game-menu-cards, .conj-grid { grid-template-columns: 1fr; }
+    .game-dd-wrap { grid-template-columns: 1fr; }
+    .main { padding: 22px 12px 50px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="app-header">
+  <span class="flag">🇫🇷</span>
+  <span class="logo">Mon Français</span>
+  <div class="breadcrumb" id="breadcrumb"></div>
+</header>
+
+<!-- ===== SCREEN: HOME ===== -->
+<div class="screen active" id="screen-home">
+  <div class="main">
+    <div class="home-hero">
+      <h1>Bonjour ! 👋</h1>
+      <p>Выбери раздел для изучения французского языка</p>
+    </div>
+    <div class="home-cards">
+      <div class="home-card lex" onclick="showLessons()">
+        <div class="card-icon">📚</div>
+        <h2>Лексика</h2>
+        <p>Слова и выражения по темам уроков</p>
+      </div>
+      <div class="home-card conj" onclick="showConjugation()">
+        <div class="card-icon">✏️</div>
+        <h2>Спряжение глаголов</h2>
+        <p>Глаголы в настоящем времени</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: LESSONS ===== -->
+<div class="screen" id="screen-lessons">
+  <div class="main">
+    <p class="section-sub">Выбери урок:</p>
+    <div class="lesson-grid" id="lesson-grid"></div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: LESSON MENU ===== -->
+<div class="screen" id="screen-lesson-menu">
+  <div class="main">
+    <h2 class="lesson-menu-title" id="lesson-menu-title"></h2>
+    <p class="section-sub">Что хочешь делать?</p>
+    <div class="lesson-menu-cards">
+      <div class="lm-card vocab" onclick="showVocabTable()">
+        <div class="lm-icon">📋</div>
+        <h3>Le vocabulaire</h3>
+        <p>Таблица слов с переводом</p>
+      </div>
+      <div class="lm-card learn" onclick="showFlashcards()">
+        <div class="lm-icon">🃏</div>
+        <h3>Apprendre</h3>
+        <p>Учи слова с карточками</p>
+      </div>
+      <div class="lm-card play" onclick="showGameMenu()">
+        <div class="lm-icon">🎮</div>
+        <h3>Jouer</h3>
+        <p>Проверь свои знания в игре</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: VOCABULARY TABLE ===== -->
+<div class="screen" id="screen-vocab">
+  <div class="main">
+    <h2 class="section-title" id="vocab-title"></h2>
+    <p class="section-sub">Нажми 🔊 чтобы услышать слово. Наведи курсор — увидишь картинку.</p>
+    <div class="vocab-table-wrap">
+      <table class="vocab-table">
+        <thead>
+          <tr>
+            <th>Français</th>
+            <th></th>
+            <th>Русский</th>
+            <th>Изображение</th>
+            <th>Apprendre</th>
+          </tr>
+        </thead>
+        <tbody id="vocab-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: FLASHCARDS ===== -->
+<div class="screen" id="screen-flashcards">
+  <div class="main">
+    <h2 class="section-title" id="fc-title"></h2>
+    <p class="section-sub" id="fc-subtitle"></p>
+    <div class="flashcard-progress" id="fc-progress"></div>
+    <div class="flashcard-wrap">
+      <div class="flashcard" id="flashcard">
+        <div class="fc-img-area" id="fc-img"></div>
+        <button class="speak-big-btn" id="fc-speak-btn" onclick="speakCurrentWord()">🔊</button>
+        <div class="fc-word" id="fc-word"></div>
+        <div style="display:flex;align-items:center;gap:10px;justify-content:center;">
+          <div class="fc-translation" id="fc-translation"></div>
+          <button class="speak-btn" onclick="speakTranslation()" title="Произнести перевод" style="flex-shrink:0;">🔊</button>
+        </div>
+        <label class="fc-known-label">
+          <input type="checkbox" id="fc-known" onchange="markKnown()"> Я выучил это слово ✅
+        </label>
+      </div>
+      <div class="fc-nav">
+        <button class="fc-btn" onclick="fcPrev()">⬅ Retour</button>
+        <button class="fc-btn primary" onclick="fcNext()">Suivant ➡</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: GAME MENU ===== -->
+<div class="screen" id="screen-game-menu">
+  <div class="main">
+    <h2 class="section-title">Jouer 🎮</h2>
+    <p class="section-sub">Выбери игру:</p>
+    <div class="game-menu-cards">
+      <div class="gm-card" onclick="showGameDD()">
+        <div class="gm-icon">🔗</div>
+        <h3>Trouve la traduction</h3>
+        <p>Соедини слова с переводом</p>
+      </div>
+      <div class="gm-card" onclick="showGameQuest()">
+        <div class="gm-icon">❓</div>
+        <h3>Qu'est-ce que c'est ?</h3>
+        <p>Напиши слово по картинке</p>
+      </div>
+      <div class="gm-card" onclick="showGameSpeak()">
+        <div class="gm-icon">🎤</div>
+        <h3>Назови слово</h3>
+        <p>Скажи вслух, что изображено на картинке</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: GAME DD ===== -->
+<div class="screen" id="screen-game-dd">
+  <div class="main">
+    <h2 class="section-title">Trouve la traduction 🔗</h2>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+      <p class="section-sub" style="margin:0">Перетащи перевод к французскому слову</p>
+      <span id="dd-round-info" style="font-size:.88rem;font-weight:700;color:var(--muted);background:var(--blue-light);padding:4px 12px;border-radius:20px;"></span>
+    </div>
+    <div id="dd-result-banner"></div>
+    <div class="game-dd-wrap">
+      <div>
+        <div class="dd-col-title">Français</div>
+        <div id="dd-fr-col"></div>
+      </div>
+      <div>
+        <div class="dd-col-title">Перевод</div>
+        <div id="dd-ru-col"></div>
+      </div>
+    </div>
+    <div class="dd-pool" id="dd-pool"></div>
+    <div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;">
+      <button class="check-btn" style="margin-top:26px" onclick="checkDD()">Vérifier ✔</button>
+      <button class="check-btn" id="dd-suivant-btn" style="margin-top:26px;display:none;background:var(--green);box-shadow:0 4px 16px rgba(34,197,94,.3);" onclick="showGameDD(true)">Suivant ➡</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: GAME QUEST ===== -->
+<div class="screen" id="screen-game-quest">
+  <div class="main">
+    <h2 class="section-title">Qu'est-ce que c'est ? ❓</h2>
+    <div class="quest-card">
+      <div class="quest-score" id="quest-score"></div>
+      <div class="quest-img" id="quest-img"></div>
+      <div class="quest-row">
+        <span class="quest-label">C'est</span>
+        <input class="quest-input" id="quest-art" placeholder="article" maxlength="4">
+        <input class="quest-input word" id="quest-word" placeholder="mot" maxlength="30">
+      </div>
+      <div class="fc-nav" style="margin-top:18px;">
+        <button class="fc-btn primary" onclick="checkQuest()">Vérifier ✔</button>
+        <button class="fc-btn" onclick="nextQuest()">Passer ⏭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: GAME SPEAK ===== -->
+<div class="screen" id="screen-game-speak">
+  <div class="main">
+    <h2 class="section-title">Назови слово 🎤</h2>
+    <div class="quest-card" style="max-width:520px;margin:0 auto;">
+      <div class="quest-score" id="speak-score"></div>
+
+      <!-- Image area -->
+      <div id="speak-img" style="
+        width:200px;height:180px;border-radius:20px;overflow:hidden;
+        background:var(--blue-light);display:flex;align-items:center;
+        justify-content:center;font-size:5rem;margin:0 auto 18px;
+        border:2.5px solid var(--blue-mid);
+      "></div>
+
+      <!-- Hint shown after wrong answer -->
+      <div id="speak-hint" style="display:none;text-align:center;margin-bottom:14px;animation:fadeIn .3s ease;">
+        <div id="speak-hint-fr" style="font-family:'Baloo 2',cursive;font-size:1.5rem;font-weight:800;color:var(--blue);"></div>
+        <div id="speak-hint-ru" style="font-size:1.1rem;color:var(--muted);font-weight:600;margin-top:4px;"></div>
+      </div>
+
+      <!-- Mic button -->
+      <button id="speak-mic-btn" onclick="startSpeakRecognition()" style="
+        width:80px;height:80px;border-radius:50%;border:none;
+        background:var(--blue);color:#fff;font-size:2.2rem;
+        cursor:pointer;box-shadow:0 6px 22px rgba(37,99,235,.35);
+        transition:transform .2s,background .2s;display:flex;
+        align-items:center;justify-content:center;margin:0 auto 12px;
+      ">🎤</button>
+      <div id="speak-status" style="font-size:.92rem;color:var(--muted);font-weight:600;text-align:center;min-height:22px;margin-bottom:10px;"></div>
+
+      <!-- Recognised text -->
+      <div id="speak-recognised" style="
+        font-size:1.05rem;color:var(--text);font-weight:700;
+        text-align:center;min-height:24px;margin-bottom:16px;
+      "></div>
+
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+        <button class="fc-btn primary" onclick="speakNext()" id="speak-next-btn">Suivant ➡</button>
+        <button class="fc-btn" onclick="speakSkip()" id="speak-skip-btn">Пропустить ⏭</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: CONJUGATION LIST ===== -->
+<div class="screen" id="screen-conjugation">
+  <div class="main">
+    <h2 class="section-title">Спряжение глаголов ✏️</h2>
+    <p class="section-sub">Выбери глагол, чтобы увидеть его спряжение в Présent:</p>
+    <div class="conj-grid" id="conj-grid"></div>
+  </div>
+</div>
+
+<!-- ===== SCREEN: CONJUGATION TABLE ===== -->
+<div class="screen" id="screen-conj-table">
+  <div class="main">
+    <div class="conj-verb-title" id="conj-verb-title"></div>
+    <div class="conj-tense-label">Présent de l'indicatif</div>
+    <div class="conj-table-wrap">
+      <table class="conj-table">
+        <thead>
+          <tr><th>Pronoun</th><th>Forme</th></tr>
+        </thead>
+        <tbody id="conj-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ============================================================
+// DATA
+// ============================================================
+const LESSONS = [
+  {
+    id: 0, fr: "La rentrée", ru: "Начало учёбы",
+    words: [
+      { fr: "un livre", art: "un", word: "livre", ru: "книга", emoji: "📚" },
+      { fr: "un cahier", art: "un", word: "cahier", ru: "тетрадь", emoji: "📓" },
+      { fr: "un sac à dos", art: "un", word: "sac à dos", ru: "рюкзак", emoji: "🎒" },
+      { fr: "une règle", art: "une", word: "règle", ru: "линейка", emoji: "📏" },
+      { fr: "une gomme", art: "une", word: "gomme", ru: "ластик", emoji: "🔳" },
+      { fr: "une trousse", art: "une", word: "trousse", ru: "пенал", emoji: "🖊️" },
+      { fr: "un stylo", art: "un", word: "stylo", ru: "ручка", emoji: "🖊️" },
+      { fr: "un crayon", art: "un", word: "crayon", ru: "карандаш", emoji: "✏️" },
+      { fr: "un feutre", art: "un", word: "feutre", ru: "фломастер", emoji: "🖍️" },
+      { fr: "un tableau", art: "un", word: "tableau", ru: "доска", emoji: "🟩" },
+      { fr: "un bureau", art: "un", word: "bureau", ru: "учительский стол", emoji: "🪑" },
+      { fr: "une bibliothèque", art: "une", word: "bibliothèque", ru: "книжный шкаф", emoji: "📖" },
+      { fr: "une fenêtre", art: "une", word: "fenêtre", ru: "окно", emoji: "🪟" },
+      { fr: "une porte", art: "une", word: "porte", ru: "дверь", emoji: "🚪" },
+      { fr: "un plafond", art: "un", word: "plafond", ru: "потолок", emoji: "🏠" },
+      { fr: "un plancher", art: "un", word: "plancher", ru: "пол", emoji: "🟫" },
+      { fr: "une maîtresse", art: "une", word: "maîtresse", ru: "учительница", emoji: "👩‍🏫" },
+      { fr: "un ordinateur", art: "un", word: "ordinateur", ru: "компьютер", emoji: "💻" },
+      { fr: "une chaise", art: "une", word: "chaise", ru: "стул", emoji: "🪑" },
+      { fr: "un élève", art: "un", word: "élève", ru: "ученик", emoji: "👦" },
+      { fr: "une jupe", art: "une", word: "jupe", ru: "юбка", emoji: "👗" },
+      { fr: "un pantalon", art: "un", word: "pantalon", ru: "брюки", emoji: "👖" },
+      { fr: "un chemisier", art: "un", word: "chemisier", ru: "блузка", emoji: "👚" },
+      { fr: "une chemise", art: "une", word: "chemise", ru: "рубашка", emoji: "👕" },
+      { fr: "une veste", art: "une", word: "veste", ru: "пиджак / куртка", emoji: "🧥" },
+      { fr: "une robe", art: "une", word: "robe", ru: "платье", emoji: "👗" },
+      { fr: "des chaussures", art: "des", word: "chaussures", ru: "обувь / туфли", emoji: "👟" },
+      { fr: "un ciel", art: "un", word: "ciel", ru: "небо", emoji: "☁️" },
+      { fr: "une feuille", art: "une", word: "feuille", ru: "лист (дерева / бумаги)", emoji: "🍂" },
+      { fr: "une forêt", art: "une", word: "forêt", ru: "лес", emoji: "🌲" },
+      { fr: "une pluie", art: "une", word: "pluie", ru: "дождь", emoji: "🌧️" },
+      { fr: "un vent", art: "un", word: "vent", ru: "ветер", emoji: "💨" },
+      { fr: "un champignon", art: "un", word: "champignon", ru: "гриб", emoji: "🍄" },
+      { fr: "un gland", art: "un", word: "gland", ru: "жёлудь", emoji: "🌰" },
+      { fr: "un hérisson", art: "un", word: "hérisson", ru: "ёжик", emoji: "🦔" },
+      { fr: "un écureuil", art: "un", word: "écureuil", ru: "белка", emoji: "🐿️" },
+      { fr: "rouge", art: "", word: "rouge", ru: "красный / красная", emoji: "🔴" },
+      { fr: "bleu / bleue", art: "", word: "bleu", ru: "синий / синяя", emoji: "🔵" },
+      { fr: "vert / verte", art: "", word: "vert", ru: "зелёный / зелёная", emoji: "🟢" },
+      { fr: "blanc / blanche", art: "", word: "blanc", ru: "белый / белая", emoji: "⬜" },
+      { fr: "noir / noire", art: "", word: "noir", ru: "чёрный / чёрная", emoji: "⬛" },
+      { fr: "jaune", art: "", word: "jaune", ru: "жёлтый / жёлтая", emoji: "🟡" },
+      { fr: "gris / grise", art: "", word: "gris", ru: "серый / серая", emoji: "🩶" },
+      { fr: "marron", art: "", word: "marron", ru: "коричневый", emoji: "🟤" },
+      { fr: "long / longue", art: "", word: "long", ru: "длинный / длинная", emoji: "📏" },
+      { fr: "court / courte", art: "", word: "court", ru: "короткий / короткая", emoji: "✂️" },
+      { fr: "grand / grande", art: "", word: "grand", ru: "большой / высокий", emoji: "📐" },
+      { fr: "petit / petite", art: "", word: "petit", ru: "маленький / низкий", emoji: "🐭" },
+      { fr: "haut / haute", art: "", word: "haut", ru: "высокий / высокая", emoji: "⬆️" },
+      { fr: "bas / basse", art: "", word: "bas", ru: "низкий / низкая", emoji: "⬇️" },
+      { fr: "rond / ronde", art: "", word: "rond", ru: "круглый / круглая", emoji: "⭕" },
+      { fr: "content / contente", art: "", word: "content", ru: "довольный / радостный", emoji: "😊" },
+      { fr: "triste", art: "", word: "triste", ru: "грустный / грустная", emoji: "😢" },
+      { fr: "gai / gaie", art: "", word: "gai", ru: "весёлый / весёлая", emoji: "😄" },
+      { fr: "un gant", art: "un", word: "gant", ru: "перчатка", emoji: "🧤" },
+      { fr: "un imperméable", art: "un", word: "imperméable", ru: "плащ", emoji: "🧥" },
+      { fr: "une botte", art: "une", word: "botte", ru: "сапог", emoji: "👢" },
+      { fr: "une branche", art: "une", word: "branche", ru: "ветка", emoji: "🌿" },
+      { fr: "une cerise", art: "une", word: "cerise", ru: "вишня", emoji: "🍒" },
+      { fr: "un nuage", art: "un", word: "nuage", ru: "облако", emoji: "☁️" },
+      { fr: "un soleil", art: "un", word: "soleil", ru: "солнце", emoji: "☀️" },
+      { fr: "une valise", art: "une", word: "valise", ru: "чемодан", emoji: "🧳" },
+      { fr: "un parapluie", art: "un", word: "parapluie", ru: "зонтик", emoji: "☂️" },
+      { fr: "un perroquet", art: "un", word: "perroquet", ru: "попугай", emoji: "🦜" },
+      { fr: "une note", art: "une", word: "note", ru: "оценка", emoji: "📝" },
+      { fr: "un cours", art: "un", word: "cours", ru: "урок", emoji: "📖" },
+      { fr: "un écolier", art: "un", word: "écolier", ru: "школьник", emoji: "🎒" },
+      { fr: "une lettre", art: "une", word: "lettre", ru: "буква / письмо", emoji: "✉️" },
+      { fr: "bon / bonne", art: "", word: "bon", ru: "хороший / хорошая", emoji: "👍" },
+      { fr: "sérieux / sérieuse", art: "", word: "sérieux", ru: "серьёзный / серьёзная", emoji: "🤓" }
+    ]
+  },
+  {
+    id: 1, fr: "Ma famille", ru: "Моя семья",
+    words: [
+      { fr: "le bébé", art: "un", word: "bébé", ru: "малыш / младенец", emoji: "👶" },
+      { fr: "le père", art: "un", word: "père", ru: "отец", emoji: "👨" },
+      { fr: "la mère", art: "une", word: "mère", ru: "мать", emoji: "👩" },
+      { fr: "le frère", art: "un", word: "frère", ru: "брат", emoji: "👦" },
+      { fr: "la sœur", art: "une", word: "sœur", ru: "сестра", emoji: "👧" },
+      { fr: "les parents", art: "les", word: "parents", ru: "родители", emoji: "👨‍👩‍👧" },
+      { fr: "la famille", art: "une", word: "famille", ru: "семья", emoji: "👨‍👩‍👧‍👦" },
+      { fr: "le grand-père", art: "un", word: "grand-père", ru: "дедушка", emoji: "👴" },
+      { fr: "la grand-mère", art: "une", word: "grand-mère", ru: "бабушка", emoji: "👵" },
+      { fr: "l'oncle", art: "un", word: "oncle", ru: "дядя", emoji: "🧔" },
+      { fr: "la tante", art: "une", word: "tante", ru: "тётя", emoji: "👩" },
+      { fr: "le fils", art: "un", word: "fils", ru: "сын", emoji: "👦" },
+      { fr: "la fille", art: "une", word: "fille", ru: "дочь / девочка", emoji: "👧" },
+      { fr: "le manteau", art: "un", word: "manteau", ru: "пальто", emoji: "🧥" },
+      { fr: "le bonnet", art: "un", word: "bonnet", ru: "шапка", emoji: "🎩" },
+      { fr: "le chapeau", art: "un", word: "chapeau", ru: "шляпа", emoji: "👒" },
+      { fr: "l'écharpe", art: "une", word: "écharpe", ru: "шарф", emoji: "🧣" },
+      { fr: "le matin", art: "un", word: "matin", ru: "утро", emoji: "🌅" },
+      { fr: "le soir", art: "un", word: "soir", ru: "вечер", emoji: "🌆" },
+      { fr: "gentil / gentille", art: "", word: "gentil", ru: "добрый / милый", emoji: "😊" },
+      { fr: "gai / gaie", art: "", word: "gai", ru: "весёлый / весёлая", emoji: "😄" },
+      { fr: "triste", art: "", word: "triste", ru: "грустный / грустная", emoji: "😢" },
+      { fr: "sage", art: "", word: "sage", ru: "послушный / послушная", emoji: "😇" },
+      { fr: "les grands-parents", art: "les", word: "grands-parents", ru: "бабушка и дедушка", emoji: "👴👵" },
+      { fr: "aider", art: "", word: "aider", ru: "помогать", emoji: "🤝" },
+      { fr: "arroser", art: "", word: "arroser", ru: "поливать", emoji: "💧" },
+      { fr: "lire", art: "", word: "lire", ru: "читать", emoji: "📖" },
+      { fr: "pleurer", art: "", word: "pleurer", ru: "плакать", emoji: "😢" },
+      { fr: "monter", art: "", word: "monter", ru: "подниматься", emoji: "⬆️" },
+      { fr: "descendre", art: "", word: "descendre", ru: "спускаться", emoji: "⬇️" },
+      { fr: "un journal", art: "un", word: "journal", ru: "газета", emoji: "📰" },
+      { fr: "le lait", art: "un", word: "lait", ru: "молоко", emoji: "🥛" },
+      { fr: "un cochon", art: "un", word: "cochon", ru: "свинья", emoji: "🐷" },
+      { fr: "un mouton", art: "un", word: "mouton", ru: "баран", emoji: "🐑" },
+      { fr: "une vendeuse", art: "une", word: "vendeuse", ru: "продавщица", emoji: "🛍️" },
+      { fr: "les dessins animés", art: "les", word: "dessins animés", ru: "мультфильм", emoji: "📺" },
+      { fr: "magique", art: "", word: "magique", ru: "волшебный", emoji: "✨" }
+    ]
+  },
+  {
+    id: 2, fr: "Maman est malade", ru: "Мама заболела",
+    words: [
+      { fr: "une tête", art: "une", word: "tête", ru: "голова", emoji: "🗣️" },
+      { fr: "une gorge", art: "une", word: "gorge", ru: "горло", emoji: "🤒" },
+      { fr: "un nez", art: "un", word: "nez", ru: "нос", emoji: "👃" },
+      { fr: "une fièvre", art: "une", word: "fièvre", ru: "температура", emoji: "🤧" },
+      { fr: "un médecin", art: "un", word: "médecin", ru: "врач", emoji: "👨‍⚕️" },
+      { fr: "un médicament", art: "un", word: "médicament", ru: "лекарство", emoji: "💊" },
+      { fr: "un lit", art: "un", word: "lit", ru: "кровать", emoji: "🛏️" },
+      { fr: "malade", art: "", word: "malade", ru: "больной / больная", emoji: "🤒" },
+      { fr: "avoir mal", art: "", word: "avoir mal", ru: "болеть", emoji: "😣" },
+      { fr: "une assiette", art: "une", word: "assiette", ru: "тарелка", emoji: "🍽️" },
+      { fr: "un couteau", art: "un", word: "couteau", ru: "нож", emoji: "🔪" },
+      { fr: "une cuillère", art: "une", word: "cuillère", ru: "ложка", emoji: "🥄" },
+      { fr: "une fourchette", art: "une", word: "fourchette", ru: "вилка", emoji: "🍴" },
+      { fr: "une tasse", art: "une", word: "tasse", ru: "чашка", emoji: "☕" },
+      { fr: "une soucoupe", art: "une", word: "soucoupe", ru: "блюдце", emoji: "🫗" },
+      { fr: "un tablier", art: "un", word: "tablier", ru: "фартук", emoji: "👨‍🍳" },
+      { fr: "la vaisselle", art: "une", word: "vaisselle", ru: "посуда", emoji: "🍽️" },
+      { fr: "la cuisine", art: "une", word: "cuisine", ru: "кухня", emoji: "🍳" },
+      { fr: "une glace", art: "une", word: "glace", ru: "мороженое / лёд", emoji: "🍦" },
+      { fr: "des lunettes", art: "des", word: "lunettes", ru: "очки", emoji: "👓" },
+      { fr: "une surprise", art: "une", word: "surprise", ru: "сюрприз", emoji: "🎁" },
+      { fr: "un cinéma", art: "un", word: "cinéma", ru: "кино", emoji: "🎬" },
+      { fr: "un théâtre", art: "un", word: "théâtre", ru: "театр", emoji: "🎭" },
+      { fr: "un stade", art: "un", word: "stade", ru: "стадион", emoji: "🏟️" },
+      { fr: "écouter", art: "", word: "écouter", ru: "слушать", emoji: "👂" },
+      { fr: "entendre", art: "", word: "entendre", ru: "слышать", emoji: "🔊" },
+      { fr: "ranger", art: "", word: "ranger", ru: "убирать / укладывать", emoji: "📦" },
+      { fr: "tousser", art: "", word: "tousser", ru: "кашлять", emoji: "😷" }
+    ]
+  },
+  {
+    id: 3, fr: "Mon ami Nicolas", ru: "Мой друг Николя",
+    words: [
+      { fr: "un ami", art: "un", word: "ami", ru: "друг", emoji: "🤝" },
+      { fr: "grand", art: "", word: "grand", ru: "высокий / большой", emoji: "📏" },
+      { fr: "petit", art: "", word: "petit", ru: "маленький / низкий", emoji: "🐭" },
+      { fr: "des yeux", art: "des", word: "yeux", ru: "глаза", emoji: "👀" },
+      { fr: "des cheveux", art: "des", word: "cheveux", ru: "волосы", emoji: "💇" },
+      { fr: "gentil", art: "", word: "gentil", ru: "добрый", emoji: "😊" },
+      { fr: "aimer", art: "", word: "aimer", ru: "любить", emoji: "❤️" },
+      { fr: "jouer", art: "", word: "jouer", ru: "играть", emoji: "🎮" },
+      { fr: "un anniversaire", art: "un", word: "anniversaire", ru: "день рождения", emoji: "🎂" },
+      { fr: "un banc", art: "un", word: "banc", ru: "скамейка", emoji: "🪑" },
+      { fr: "une boîte", art: "une", word: "boîte", ru: "коробка", emoji: "📦" },
+      { fr: "une bouche", art: "une", word: "bouche", ru: "рот", emoji: "👄" },
+      { fr: "une bougie", art: "une", word: "bougie", ru: "свечка", emoji: "🕯️" },
+      { fr: "une boutique", art: "une", word: "boutique", ru: "небольшой магазин", emoji: "🏪" },
+      { fr: "un bras", art: "un", word: "bras", ru: "рука", emoji: "💪" },
+      { fr: "une carotte", art: "une", word: "carotte", ru: "морковь", emoji: "🥕" },
+      { fr: "un chou", art: "un", word: "chou", ru: "капуста", emoji: "🥬" },
+      { fr: "une cour", art: "une", word: "cour", ru: "двор", emoji: "🏡" },
+      { fr: "un fruit", art: "un", word: "fruit", ru: "фрукт", emoji: "🍎" },
+      { fr: "une jambe", art: "une", word: "jambe", ru: "нога", emoji: "🦵" },
+      { fr: "une joue", art: "une", word: "joue", ru: "щека", emoji: "😊" },
+      { fr: "un légume", art: "un", word: "légume", ru: "овощ", emoji: "🥦" },
+      { fr: "une main", art: "une", word: "main", ru: "кисть руки / ладонь", emoji: "✋" },
+      { fr: "une oreille", art: "une", word: "oreille", ru: "ухо", emoji: "👂" },
+      { fr: "un pied", art: "un", word: "pied", ru: "ступня", emoji: "🦶" },
+      { fr: "un visage", art: "un", word: "visage", ru: "лицо", emoji: "😀" },
+      { fr: "une récréation", art: "une", word: "récréation", ru: "перемена", emoji: "🛝" },
+      { fr: "un violon", art: "un", word: "violon", ru: "скрипка", emoji: "🎻" },
+      { fr: "une trompette", art: "une", word: "trompette", ru: "труба", emoji: "🎺" },
+      { fr: "blond / blonde", art: "", word: "blond", ru: "белокурый / белокурая", emoji: "👱" },
+      { fr: "beau / belle", art: "", word: "beau", ru: "красивый / красивая", emoji: "🌟" },
+      { fr: "un jeu de société", art: "un", word: "jeu de société", ru: "настольная игра", emoji: "🎲" },
+      { fr: "donner", art: "", word: "donner", ru: "дарить", emoji: "🎁" },
+      { fr: "venir", art: "", word: "venir", ru: "приходить", emoji: "🚶" },
+      { fr: "ouvrir", art: "", word: "ouvrir", ru: "открывать", emoji: "🔓" }
+    ]
+  },
+  {
+    id: 4, fr: "L'hiver est là", ru: "Зима пришла",
+    words: [
+      { fr: "une neige", art: "une", word: "neige", ru: "снег", emoji: "❄️" },
+      { fr: "un froid", art: "un", word: "froid", ru: "холод", emoji: "🥶" },
+      { fr: "un manteau", art: "un", word: "manteau", ru: "пальто", emoji: "🧥" },
+      { fr: "des gants", art: "des", word: "gants", ru: "перчатки", emoji: "🧤" },
+      { fr: "un bonnet", art: "un", word: "bonnet", ru: "шапка", emoji: "🎩" },
+      { fr: "des bottes", art: "des", word: "bottes", ru: "сапоги", emoji: "👢" },
+      { fr: "un ski", art: "un", word: "ski", ru: "лыжи", emoji: "⛷️" },
+      { fr: "une luge", art: "une", word: "luge", ru: "санки", emoji: "🛷" },
+      { fr: "un flocon", art: "un", word: "flocon", ru: "снежинка", emoji: "❄️" },
+      { fr: "une montagne", art: "une", word: "montagne", ru: "гора", emoji: "⛰️" },
+      { fr: "une mer", art: "une", word: "mer", ru: "море", emoji: "🌊" },
+      { fr: "un étang", art: "un", word: "étang", ru: "пруд", emoji: "🏞️" },
+      { fr: "une colline", art: "une", word: "colline", ru: "горка", emoji: "⛷️" },
+      { fr: "un balai", art: "un", word: "balai", ru: "метла", emoji: "🧹" },
+      { fr: "une boule de neige", art: "une", word: "boule de neige", ru: "снежок", emoji: "⛄" },
+      { fr: "un pingouin", art: "un", word: "pingouin", ru: "пингвин", emoji: "🐧" },
+      { fr: "un phoque", art: "un", word: "phoque", ru: "тюлень", emoji: "🦭" },
+      { fr: "un renne", art: "un", word: "renne", ru: "олень", emoji: "🦌" },
+      { fr: "des patins", art: "des", word: "patins", ru: "коньки", emoji: "⛸️" },
+      { fr: "chanter", art: "", word: "chanter", ru: "петь", emoji: "🎵" },
+      { fr: "danser", art: "", word: "danser", ru: "танцевать", emoji: "💃" },
+      { fr: "glisser", art: "", word: "glisser", ru: "скользить", emoji: "🛷" },
+      { fr: "lancer", art: "", word: "lancer", ru: "бросать", emoji: "🤾" },
+      { fr: "patiner", art: "", word: "patiner", ru: "кататься на коньках", emoji: "⛸️" },
+      { fr: "faire du sport", art: "", word: "faire du sport", ru: "заниматься спортом", emoji: "🏃" }
+    ]
+  },
+  {
+    id: 5, fr: "Le Nouvel An approche", ru: "Приближается Новый год",
+    words: [
+      { fr: "un Nouvel An", art: "un", word: "Nouvel An", ru: "Новый год", emoji: "🎆" },
+      { fr: "un sapin", art: "un", word: "sapin", ru: "ёлка", emoji: "🎄" },
+      { fr: "un cadeau", art: "un", word: "cadeau", ru: "подарок", emoji: "🎁" },
+      { fr: "une fête", art: "une", word: "fête", ru: "праздник", emoji: "🎉" },
+      { fr: "un Père Noël", art: "un", word: "Père Noël", ru: "Дед Мороз", emoji: "🎅" },
+      { fr: "une guirlande", art: "une", word: "guirlande", ru: "гирлянда", emoji: "✨" },
+      { fr: "un champagne", art: "un", word: "champagne", ru: "шампанское", emoji: "🥂" },
+      { fr: "une bûche", art: "une", word: "bûche", ru: "рождественское полено", emoji: "🪵" }
+    ]
+  },
+  {
+    id: 6, fr: "Nos amis les animaux", ru: "Наши друзья животные",
+    words: [
+      { fr: "un chien", art: "un", word: "chien", ru: "собака", emoji: "🐕" },
+      { fr: "un chat", art: "un", word: "chat", ru: "кошка", emoji: "🐱" },
+      { fr: "un lapin", art: "un", word: "lapin", ru: "кролик", emoji: "🐰" },
+      { fr: "un oiseau", art: "un", word: "oiseau", ru: "птица", emoji: "🐦" },
+      { fr: "un poisson", art: "un", word: "poisson", ru: "рыба", emoji: "🐟" },
+      { fr: "un cheval", art: "un", word: "cheval", ru: "лошадь", emoji: "🐴" },
+      { fr: "une vache", art: "une", word: "vache", ru: "корова", emoji: "🐄" },
+      { fr: "un cochon", art: "un", word: "cochon", ru: "свинья", emoji: "🐷" },
+      { fr: "une poule", art: "une", word: "poule", ru: "курица", emoji: "🐔" },
+      { fr: "un mouton", art: "un", word: "mouton", ru: "овца", emoji: "🐑" }
+    ]
+  },
+  {
+    id: 7, fr: "C'est le printemps", ru: "Это весна",
+    words: [
+      { fr: "un printemps", art: "un", word: "printemps", ru: "весна", emoji: "🌸" },
+      { fr: "une fleur", art: "une", word: "fleur", ru: "цветок", emoji: "💐" },
+      { fr: "un arbre", art: "un", word: "arbre", ru: "дерево", emoji: "🌳" },
+      { fr: "un soleil", art: "un", word: "soleil", ru: "солнце", emoji: "☀️" },
+      { fr: "une pluie", art: "une", word: "pluie", ru: "дождь", emoji: "🌧️" },
+      { fr: "un jardin", art: "un", word: "jardin", ru: "сад", emoji: "🌻" },
+      { fr: "une herbe", art: "une", word: "herbe", ru: "трава", emoji: "🌿" },
+      { fr: "un papillon", art: "un", word: "papillon", ru: "бабочка", emoji: "🦋" },
+      { fr: "une abeille", art: "une", word: "abeille", ru: "пчела", emoji: "🐝" }
+    ]
+  }
+];
+
+const VERBS = [
+  {
+    fr: "être", ru: "быть",
+    forms: [
+      {pro:"je", form:"suis"}, {pro:"tu", form:"es"}, {pro:"il/elle", form:"est"},
+      {pro:"nous", form:"sommes"}, {pro:"vous", form:"êtes"}, {pro:"ils/elles", form:"sont"}
+    ]
+  },
+  {
+    fr: "avoir", ru: "иметь",
+    forms: [
+      {pro:"j'", form:"ai"}, {pro:"tu", form:"as"}, {pro:"il/elle", form:"a"},
+      {pro:"nous", form:"avons"}, {pro:"vous", form:"avez"}, {pro:"ils/elles", form:"ont"}
+    ]
+  },
+  {
+    fr: "aller", ru: "идти / ехать",
+    forms: [
+      {pro:"je", form:"vais"}, {pro:"tu", form:"vas"}, {pro:"il/elle", form:"va"},
+      {pro:"nous", form:"allons"}, {pro:"vous", form:"allez"}, {pro:"ils/elles", form:"vont"}
+    ]
+  },
+  {
+    fr: "dessiner", ru: "рисовать",
+    forms: [
+      {pro:"je", form:"dessine"}, {pro:"tu", form:"dessines"}, {pro:"il/elle", form:"dessine"},
+      {pro:"nous", form:"dessinons"}, {pro:"vous", form:"dessinez"}, {pro:"ils/elles", form:"dessinent"}
+    ]
+  },
+  {
+    fr: "jouer", ru: "играть",
+    forms: [
+      {pro:"je", form:"joue"}, {pro:"tu", form:"joues"}, {pro:"il/elle", form:"joue"},
+      {pro:"nous", form:"jouons"}, {pro:"vous", form:"jouez"}, {pro:"ils/elles", form:"jouent"}
+    ]
+  },
+  {
+    fr: "regarder", ru: "смотреть",
+    forms: [
+      {pro:"je", form:"regarde"}, {pro:"tu", form:"regardes"}, {pro:"il/elle", form:"regarde"},
+      {pro:"nous", form:"regardons"}, {pro:"vous", form:"regardez"}, {pro:"ils/elles", form:"regardent"}
+    ]
+  },
+  {
+    fr: "mettre", ru: "надевать / класть",
+    forms: [
+      {pro:"je", form:"mets"}, {pro:"tu", form:"mets"}, {pro:"il/elle", form:"met"},
+      {pro:"nous", form:"mettons"}, {pro:"vous", form:"mettez"}, {pro:"ils/elles", form:"mettent"}
+    ]
+  },
+  {
+    fr: "acheter", ru: "покупать",
+    forms: [
+      {pro:"j'", form:"achète"}, {pro:"tu", form:"achètes"}, {pro:"il/elle", form:"achète"},
+      {pro:"nous", form:"achetons"}, {pro:"vous", form:"achetez"}, {pro:"ils/elles", form:"achètent"}
+    ]
+  },
+  {
+    fr: "aimer", ru: "любить",
+    forms: [
+      {pro:"j'", form:"aime"}, {pro:"tu", form:"aimes"}, {pro:"il/elle", form:"aime"},
+      {pro:"nous", form:"aimons"}, {pro:"vous", form:"aimez"}, {pro:"ils/elles", form:"aiment"}
+    ]
+  },
+  {
+    fr: "parler", ru: "говорить",
+    forms: [
+      {pro:"je", form:"parle"}, {pro:"tu", form:"parles"}, {pro:"il/elle", form:"parle"},
+      {pro:"nous", form:"parlons"}, {pro:"vous", form:"parlez"}, {pro:"ils/elles", form:"parlent"}
+    ]
+  },
+  {
+    fr: "manger", ru: "есть / кушать",
+    forms: [
+      {pro:"je", form:"mange"}, {pro:"tu", form:"manges"}, {pro:"il/elle", form:"mange"},
+      {pro:"nous", form:"mangeons"}, {pro:"vous", form:"mangez"}, {pro:"ils/elles", form:"mangent"}
+    ]
+  },
+  {
+    fr: "habiter", ru: "жить / проживать",
+    forms: [
+      {pro:"j'", form:"habite"}, {pro:"tu", form:"habites"}, {pro:"il/elle", form:"habite"},
+      {pro:"nous", form:"habitons"}, {pro:"vous", form:"habitez"}, {pro:"ils/elles", form:"habitent"}
+    ]
+  },
+  {
+    fr: "faire", ru: "делать",
+    forms: [
+      {pro:"je", form:"fais"}, {pro:"tu", form:"fais"}, {pro:"il/elle", form:"fait"},
+      {pro:"nous", form:"faisons"}, {pro:"vous", form:"faites"}, {pro:"ils/elles", form:"font"}
+    ]
+  },
+  {
+    fr: "vouloir", ru: "хотеть",
+    forms: [
+      {pro:"je", form:"veux"}, {pro:"tu", form:"veux"}, {pro:"il/elle", form:"veut"},
+      {pro:"nous", form:"voulons"}, {pro:"vous", form:"voulez"}, {pro:"ils/elles", form:"veulent"}
+    ]
+  },
+  {
+    fr: "pouvoir", ru: "мочь",
+    forms: [
+      {pro:"je", form:"peux"}, {pro:"tu", form:"peux"}, {pro:"il/elle", form:"peut"},
+      {pro:"nous", form:"pouvons"}, {pro:"vous", form:"pouvez"}, {pro:"ils/elles", form:"peuvent"}
+    ]
+  },
+  {
+    fr: "savoir", ru: "знать / уметь",
+    forms: [
+      {pro:"je", form:"sais"}, {pro:"tu", form:"sais"}, {pro:"il/elle", form:"sait"},
+      {pro:"nous", form:"savons"}, {pro:"vous", form:"savez"}, {pro:"ils/elles", form:"savent"}
+    ]
+  },
+  {
+    fr: "s'appeler", ru: "называться / зваться",
+    forms: [
+      {pro:"je", form:"m'appelle"}, {pro:"tu", form:"t'appelles"}, {pro:"il/elle", form:"s'appelle"},
+      {pro:"nous", form:"nous appelons"}, {pro:"vous", form:"vous appelez"}, {pro:"ils/elles", form:"s'appellent"}
+    ]
+  },
+  {
+    fr: "aider", ru: "помогать",
+    forms: [
+      {pro:"j'", form:"aide"}, {pro:"tu", form:"aides"}, {pro:"il/elle", form:"aide"},
+      {pro:"nous", form:"aidons"}, {pro:"vous", form:"aidez"}, {pro:"ils/elles", form:"aident"}
+    ]
+  },
+  {
+    fr: "donner", ru: "давать / дарить",
+    forms: [
+      {pro:"je", form:"donne"}, {pro:"tu", form:"donnes"}, {pro:"il/elle", form:"donne"},
+      {pro:"nous", form:"donnons"}, {pro:"vous", form:"donnez"}, {pro:"ils/elles", form:"donnent"}
+    ]
+  },
+  {
+    fr: "lire", ru: "читать",
+    forms: [
+      {pro:"je", form:"lis"}, {pro:"tu", form:"lis"}, {pro:"il/elle", form:"lit"},
+      {pro:"nous", form:"lisons"}, {pro:"vous", form:"lisez"}, {pro:"ils/elles", form:"lisent"}
+    ]
+  },
+  {
+    fr: "écrire", ru: "писать",
+    forms: [
+      {pro:"j'", form:"écris"}, {pro:"tu", form:"écris"}, {pro:"il/elle", form:"écrit"},
+      {pro:"nous", form:"écrivons"}, {pro:"vous", form:"écrivez"}, {pro:"ils/elles", form:"écrivent"}
+    ]
+  }
+];
+
+// ============================================================
+// STATE
+// ============================================================
+let currentLesson = null;
+let fcIndex = 0;
+let fcWords = [];
+// Per-word custom images: { lessonId_wordIndex: dataURL }
+let wordImages = JSON.parse(localStorage.getItem('wordImages') || '{}');
+// Per-word learn checkbox: { lessonId_wordIndex: bool }
+let learnChecks = JSON.parse(localStorage.getItem('learnChecks') || '{}');
+// Per-word "known" in flashcards: { lessonId_wordIndex: bool }
+let knownWords = JSON.parse(localStorage.getItem('knownWords') || '{}');
+
+// Drag-drop state
+let dragWord = null;
+let ddAssigned = {}; // targetIndex -> word text
+
+// Quest state
+let questWords = [];
+let questIdx = 0;
+let questScore = 0;
+
+// Navigation stack
+let navStack = [];
+
+// ============================================================
+// UTIL
+// ============================================================
+function showToast(msg, type = 'success') {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.className = 'toast show ' + type;
+  setTimeout(() => t.className = 'toast', 2200);
+}
+
+function learnKey(lessonId, wi) { return lessonId + '_' + wi; }
+function knownKey(lessonId, wi) { return 'k_' + lessonId + '_' + wi; }
+function imgKey(lessonId, wi) { return lessonId + '_' + wi; }
+
+function getLearnWords(lesson) {
+  return lesson.words.filter((w, i) => {
+    const k = learnKey(lesson.id, i);
+    return learnChecks[k] !== false;
+  });
+}
+
+function saveLS() {
+  localStorage.setItem('wordImages', JSON.stringify(wordImages));
+  localStorage.setItem('learnChecks', JSON.stringify(learnChecks));
+  localStorage.setItem('knownWords', JSON.stringify(knownWords));
+}
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function buildBreadcrumb(items) {
+  const bc = document.getElementById('breadcrumb');
+  bc.innerHTML = items.map((item, i) =>
+    i < items.length - 1
+      ? `<span onclick="${item.fn}">${item.label}</span> ›`
+      : `<span>${item.label}</span>`
+  ).join(' ');
+}
+
+// ============================================================
+// HOME
+// ============================================================
+function goHome() {
+  showScreen('screen-home');
+  buildBreadcrumb([{ label: '🏠 Главная' }]);
+}
+
+// ============================================================
+// LESSONS LIST
+// ============================================================
+function showLessons() {
+  const grid = document.getElementById('lesson-grid');
+  grid.innerHTML = LESSONS.map((l, i) => `
+    <div class="lesson-card" onclick="showLessonMenu(${i})">
+      <div class="lesson-num">${i + 1}</div>
+      <div>
+        <h3>${l.fr}</h3>
+        <span>${l.ru}</span>
+      </div>
+    </div>
+  `).join('');
+  showScreen('screen-lessons');
+  buildBreadcrumb([
+    { label: '🏠 Главная', fn: 'goHome()' },
+    { label: 'Лексика' }
+  ]);
+}
+
+// ============================================================
+// LESSON MENU
+// ============================================================
+function showLessonMenu(idx) {
+  currentLesson = LESSONS[idx];
+  document.getElementById('lesson-menu-title').textContent = currentLesson.fr + ' — ' + currentLesson.ru;
+  showScreen('screen-lesson-menu');
+  buildBreadcrumb([
+    { label: '🏠 Главная', fn: 'goHome()' },
+    { label: 'Лексика', fn: 'showLessons()' },
+    { label: currentLesson.fr }
+  ]);
+}
+
+// ============================================================
+// VOCABULARY TABLE
+// ============================================================
+function showVocabTable() {
+  document.getElementById('vocab-title').textContent = 'Le vocabulaire — ' + currentLesson.fr;
+  const tbody = document.getElementById('vocab-tbody');
+  tbody.innerHTML = currentLesson.words.map((w, i) => {
+    const key = imgKey(currentLesson.id, i);
+    const imgSrc = wordImages[key];
+    const checked = learnChecks[learnKey(currentLesson.id, i)] !== false;
+    const tooltipContent = imgSrc
+      ? `<img src="${imgSrc}" alt="${w.fr}">`
+      : `<div class='no-img'>${w.emoji}<br>${w.fr}</div>`;
+    return `
+      <tr>
+        <td>
+          <span class="fr-word" id="frw-${i}">
+            ${w.fr}
+            <div class="word-img-tooltip">${tooltipContent}</div>
+          </span>
+        </td>
+        <td>
+          <button class="speak-btn" onclick="speakWord('${w.fr}')" title="Произнести">🔊</button>
+        </td>
+        <td>${w.ru}</td>
+        <td>
+          <input type="file" accept="image/*" class="upload-input" id="upload-${i}" onchange="uploadImg(event, ${i})">
+          <button class="upload-img-btn" onclick="document.getElementById('upload-${i}').click()">
+            ${imgSrc ? '🖼️ Изменить' : '📷 Загрузить'}
+          </button>
+        </td>
+        <td style="text-align:center;">
+          <input type="checkbox" class="learn-check" id="lc-${i}" ${checked ? 'checked' : ''}
+            onchange="toggleLearn(${i}, this.checked)">
+        </td>
+      </tr>
+    `;
+  }).join('');
+  showScreen('screen-vocab');
+  buildBreadcrumb([
+    { label: '🏠 Главная', fn: 'goHome()' },
+    { label: 'Лексика', fn: 'showLessons()' },
+    { label: currentLesson.fr, fn: `showLessonMenu(${currentLesson.id})` },
+    { label: 'Vocabulaire' }
+  ]);
+}
+
+function uploadImg(event, wordIdx) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const key = imgKey(currentLesson.id, wordIdx);
+    wordImages[key] = e.target.result;
+    saveLS();
+    showVocabTable();
+    showToast('Изображение сохранено! 🖼️');
+  };
+  reader.readAsDataURL(file);
+}
+
+function toggleLearn(wordIdx, val) {
+  learnChecks[learnKey(currentLesson.id, wordIdx)] = val;
+  saveLS();
+}
+
+// ============================================================
+// FLASHCARDS
+// ============================================================
+function showFlashcards() {
+  fcWords = getLearnWords(currentLesson).filter((w, i) => {
+    const origIdx = currentLesson.words.indexOf(w);
+    return !knownWords[knownKey(currentLesson.id, origIdx)];
+  });
+  if (fcWords.length === 0) {
+    showToast('Все слова уже выучены! 🎉');
+    return;
+  }
+  fcIndex = 0;
+  document.getElementById('fc-title').textContent = 'Apprendre — ' + currentLesson.fr;
+  document.getElementById('fc-subtitle').textContent = `${fcWords.length} слов для изучения`;
+  renderFC();
+  showScreen('screen-flashcards');
+  buildBreadcrumb([
+    { label: '🏠 Главная', fn: 'goHome()' },
+    { label: 'Лексика', fn: 'showLessons()' },
+    { label: currentLesson.fr, fn: `showLessonMenu(${currentLesson.id})` },
+    { label: 'Apprendre' }
+  ]);
+  setTimeout(() => speakCurrentWord(), 500);
+}
+
+function renderFC() {
+  if (!fcWords.length) return;
+  if (fcIndex < 0 || fcIndex >= fcWords.length) fcIndex = 0;
+
+  const prog = document.getElementById('fc-progress');
+  prog.innerHTML = fcWords.map((w, i) => `<div class="fc-dot ${i < fcIndex ? 'done' : i === fcIndex ? 'active' : ''}"></div>`).join('');
+
+  const w = fcWords[fcIndex];
+  if (!w) return;
+  const origIdx = currentLesson.words.indexOf(w);
+  const key = imgKey(currentLesson.id, origIdx);
+  const imgSrc = wordImages[key];
+
+  const imgArea = document.getElementById('fc-img');
+  if (imgSrc) {
+    imgArea.innerHTML = `<img src="${imgSrc}" alt="${w.fr}">`;
+  } else {
+    imgArea.innerHTML = `<span style="font-size:4.5rem">${w.emoji}</span>`;
+  }
+
+  document.getElementById('fc-word').textContent = w.fr;
+  document.getElementById('fc-translation').textContent = w.ru;
+  const isKnown = !!knownWords[knownKey(currentLesson.id, origIdx)];
+  document.getElementById('fc-known').checked = isKnown;
+}
+
+function cleanForSpeech(text) {
+  // Remove "/" and extra spaces so TTS doesn't read the slash
+  return text.replace(/\s*\/\s*/g, ' ').trim();
+}
+
+function speakCurrentWord() {
+  if (!fcWords[fcIndex]) return;
+  const w = fcWords[fcIndex];
+  const frUtter = new SpeechSynthesisUtterance(w.fr);
+  frUtter.lang = 'fr-FR';
+  const voices = window.speechSynthesis.getVoices();
+  const frVoice = voices.find(v => v.lang.startsWith('fr'));
+  if (frVoice) frUtter.voice = frVoice;
+  frUtter.rate = 0.85;
+  frUtter.onend = () => {
+    const ruUtter = new SpeechSynthesisUtterance(cleanForSpeech(w.ru));
+    ruUtter.lang = 'ru-RU';
+    const ruVoice = voices.find(v => v.lang.startsWith('ru'));
+    if (ruVoice) ruUtter.voice = ruVoice;
+    ruUtter.rate = 0.9;
+    window.speechSynthesis.speak(ruUtter);
+  };
+  window.speechSynthesis.cancel();
+  window.speechSynthesis.speak(frUtter);
+}
+
+function speakTranslation() {
+  if (!fcWords[fcIndex]) return;
+  const w = fcWords[fcIndex];
+  window.speechSynthesis.cancel();
+  const ruUtter = new SpeechSynthesisUtterance(cleanForSpeech(w.ru));
+  ruUtter.lang = 'ru-RU';
+  const voices = window.speechSynthesis.getVoices();
+  const ruVoice = voices.find(v => v.lang.startsWith('ru'));
+  if (ruVoice) ruUtter.voice = ruVoice;
+  ruUtter.rate = 0.9;
+  window.speechSynthesis.speak(ruUtter);
+}
+
+function fcNext() {
+  if (fcIndex < fcWords.length - 1) {
+    fcIndex++;
+  } else {
+    fcIndex = 0;
+    showToast('Начинаем сначала! 🔄');
+  }
+  renderFC();
+  setTimeout(() => speakCurrentWord(), 300);
+}
+
+function fcPrev() {
+  if (fcIndex > 0) { fcIndex--; renderFC(); }
+}
+
+function markKnown() {
+  const w = fcWords[fcIndex];
+  const origIdx = currentLesson.words.indexOf(w);
+  const k = knownKey(currentLesson.id, origIdx);
+  knownWords[k] = document.getElementById('fc-known').checked;
+  saveLS();
+  if (knownWords[k]) {
+    showToast('Слово помечено как выученное ✅');
+    setTimeout(() => {
+      fcWords = fcWords.filter((_, i) => i !== fcIndex);
+      if (fcWords.length === 0) { showToast('Все слова выучены! 🎉'); return; }
+      if (fcIndex >= fcWords.length) fcIndex = fcWords.length - 1;
+      renderFC();
+    }, 600);
+  }
+}
+
+// ============================================================
+// GAME MENU
+// ============================================================
+function showGameMenu() {
+  showScreen('screen-game-menu');
+  buildBreadcrumb([
+    { label: '🏠 Главная', fn: 'goHome()' },
+    { label: 'Лексика', fn: 'showLessons()' },
+    { label: currentLesson.fr, fn: `showLessonMenu(${currentLesson.id})` },
+    { label: 'Jouer' }
+  ]);
+}
+
+// ============================================================
+// GAME: DRAG-DROP
+// ============================================================
+const DD_COLORS = ['#2563eb','#22c55e','#f59e0b','#ef4444','#8b5cf6'];
+
+// Tracks which words have already appeared in this DD session
+let ddUsedIndices = [];
+
+function showGameDD(resume) {
+  // On first launch reset used words
+  if (!resume) ddUsedIndices = [];
+
+  const allWords = getLearnWords(currentLesson);
+
+  // Words not yet used this session
+  let remaining = allWords.filter((_, i) => !ddUsedIndices.includes(i));
+
+  // If all words exhausted — reset and start over
+  if (remaining.length === 0) {
+    ddUsedIndices = [];
+    remaining = [...allWords];
+  }
+
+  // Pick up to 5
+  const shuffledRemaining = [...remaining].sort(() => Math.random() - .5);
+  const pool = shuffledRemaining.slice(0, 5);
+
+  // Mark them as used
+  pool.forEach(w => {
+    const idx = allWords.indexOf(w);
+    if (!ddUsedIndices.includes(idx)) ddUsedIndices.push(idx);
+  });
+
+  const frCol = document.getElementById('dd-fr-col');
+  const ruCol = document.getElementById('dd-ru-col');
+  const poolEl = document.getElementById('dd-pool');
+  document.getElementById('dd-result-banner').innerHTML = '';
+  document.getElementById('dd-suivant-btn').style.display = 'none';
+  ddAssigned = {};
+
+  frCol.innerHTML = pool.map((w, i) => `
+    <div class="dd-fr-item" style="background:${DD_COLORS[i % DD_COLORS.length]}" data-idx="${i}">${w.fr}</div>
+  `).join('');
+
+  ruCol.innerHTML = pool.map((w, i) => `
+    <div class="dd-target" id="dd-target-${i}" data-idx="${i}"
+      ondragover="ddOver(event)" ondrop="ddDrop(event, ${i})" ondragleave="ddLeave(event)">
+      <span style="color:#94a3b8;font-size:.85rem">перетащи сюда</span>
+    </div>
+  `).join('');
+
+  const shuffled = [...pool].sort(() => Math.random() - .5);
+  poolEl.innerHTML = shuffled.map((w, i) => `
+    <div class="dd-word" draggable="true" id="dd-word-${i}" data-word="${w.ru}"
+      ondragstart="ddStart(event,'${w.ru.replace(/'/g,"\\'")}') " ondragend="ddEnd(event)">
+      ${w.ru}
+    </div>
+  `).join('');
+
+  window._ddPool = pool;
+
+  // Show remaining count
+  const used = ddUsedIndices.length;
+  const total = allWords.length;
+  document.getElementById('dd-round-info').textContent =
+    `Слова ${Math.min(used, total)} / ${total}`;
+
+  showScreen('screen-game-dd');
+  buildBreadcrumb([
+    { label: '🏠 Главная', fn: 'goHome()' },
+    { label: currentLesson.fr, fn: `showLessonMenu(${currentLesson.id})` },
+    { label: 'Jouer', fn: 'showGameMenu()' },
+    { label: 'Traduction' }
+  ]);
+}
+
+function ddStart(e, word) {
+  dragWord = word;
+  e.currentTarget.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.setData('text/plain', word);
+}
+function ddEnd(e) { e.currentTarget.classList.remove('dragging'); }
+function ddOver(e) { e.preventDefault(); e.currentTarget.classList.add('over'); }
+function ddLeave(e) { e.currentTarget.classList.remove('over'); }
+function ddDrop(e, idx) {
+  e.preventDefault();
+  const word = e.dataTransfer.getData('text/plain') || dragWord;
+  if (!word) return;
+  const target = document.getElementById('dd-target-' + idx);
+  target.classList.remove('over');
+  target.innerHTML = `<span style="font-weight:700;color:#1e293b">${word}</span>`;
+  ddAssigned[idx] = word;
+}
+
+function checkDD() {
+  const pool = window._ddPool;
+  let allFilled = true, correct = 0;
+  for (let i = 0; i < pool.length; i++) {
+    const target = document.getElementById('dd-target-' + i);
+    if (!ddAssigned[i]) { allFilled = false; continue; }
+    if (ddAssigned[i] === pool[i].ru) {
+      target.classList.add('correct'); target.classList.remove('wrong'); correct++;
+    } else {
+      target.classList.add('wrong'); target.classList.remove('correct');
+      setTimeout(() => target.classList.remove('wrong'), 600);
+    }
+  }
+  if (!allFilled) { showToast('Заполни все поля!', 'error'); return; }
+
+  const banner = document.getElementById('dd-result-banner');
+  const allWords = getLearnWords(currentLesson);
+  const remaining = allWords.length - ddUsedIndices.length;
+  const hasMore = remaining > 0;
+
+  if (correct === pool.length) {
+    banner.innerHTML = `<div class="result-banner success">🎉 Bravo ! Tout est correct !</div>`;
+    if (hasMore) {
+      document.getElementById('dd-suivant-btn').style.display = 'inline-flex';
+    } else {
+      // All words done — offer restart
+      document.getElementById('dd-suivant-btn').style.display = 'inline-flex';
+      document.getElementById('dd-suivant-btn').textContent = '🔄 Recommencer';
+    }
+  } else {
+    banner.innerHTML = `<div class="result-banner error">❌ ${correct} из ${pool.length} верно. Исправь ошибки!</div>`;
+  }
+  banner.scrollIntoView({ behavior: 'smooth' });
+}
+
+// ============================================================
+// GAME: QU'EST-CE QUE C'EST
+// ============================================================
+function showGameQuest() {
+  questWords = [...getLearnWords(currentLesson)].sort(() => Math.random() - .5);
+  questIdx = 0; questScore = 0;
+  renderQuest();
+  showScreen('screen-game-quest');
+  buildBreadcrumb([
+    { label: '🏠 Главная', fn: 'goHome()' },
+    { label: currentLesson.fr, fn: `showLessonMenu(${currentLesson.id})` },
+    { label: 'Jouer', fn: 'showGameMenu()' },
+    { label: "Qu'est-ce que c'est" }
+  ]);
+}
+
+function renderQuest() {
+  if (questIdx >= questWords.length) {
+    document.getElementById('quest-img').innerHTML = `<span style="font-size:3rem">🏆</span>`;
+    document.getElementById('quest-score').textContent = `Результат: ${questScore} / ${questWords.length}`;
+    document.getElementById('quest-art').value = '';
+    document.getElementById('quest-word').value = '';
+    document.getElementById('quest-art').disabled = true;
+    document.getElementById('quest-word').disabled = true;
+    return;
+  }
+  const w = questWords[questIdx];
+  if (!w) return;
+  const origIdx = currentLesson.words.indexOf(w);
+  const key = imgKey(currentLesson.id, origIdx);
+  const imgSrc = wordImages[key];
+  const imgEl = document.getElementById('quest-img');
+  if (imgSrc) {
+    imgEl.innerHTML = `<img src="${imgSrc}" alt="">`;
+  } else {
+    imgEl.innerHTML = `<span style="font-size:4rem">${w.emoji}</span>`;
+  }
+  document.getElementById('quest-score').textContent = `Слово ${questIdx + 1} из ${questWords.length} | Очки: ${questScore}`;
+  document.getElementById('quest-art').value = '';
+  document.getElementById('quest-word').value = '';
+  document.getElementById('quest-art').className = 'quest-input';
+  document.getElementById('quest-word').className = 'quest-input word';
+  document.getElementById('quest-art').disabled = false;
+  document.getElementById('quest-word').disabled = false;
+  document.getElementById('quest-word').focus();
+}
+
+function checkQuest() {
+  const w = questWords[questIdx];
+  const art = document.getElementById('quest-art').value.trim().toLowerCase();
+  const word = document.getElementById('quest-word').value.trim().toLowerCase();
+  const correctWord = w.word.toLowerCase();
+
+  // Build list of accepted articles for this word
+  const artEquiv = {
+    'le':  ['le', 'un'],
+    'la':  ['la', 'une'],
+    "l'":  ["l'", 'un', 'une'],
+    'les': ['les', 'des'],
+    'un':  ['un', 'le'],
+    'une': ['une', 'la'],
+    'des': ['des', 'les'],
+    '':    ['']
+  };
+  const correctArt = w.art.toLowerCase();
+  const accepted = artEquiv[correctArt] || [correctArt];
+  const artOk = !correctArt || accepted.includes(art);
+  const wordOk = word === correctWord;
+  if (artOk && wordOk) {
+    document.getElementById('quest-art').className = 'quest-input correct';
+    document.getElementById('quest-word').className = 'quest-input word correct';
+    questScore++;
+    showToast('Correct ! 🎉');
+    setTimeout(() => { questIdx++; renderQuest(); }, 900);
+  } else {
+    if (!wordOk) document.getElementById('quest-word').className = 'quest-input word wrong';
+    if (!artOk) document.getElementById('quest-art').className = 'quest-input wrong';
+    showToast(`Правильно: ${w.fr}`, 'error');
+    setTimeout(() => {
+      document.getElementById('quest-art').className = 'quest-input';
+      document.getElementById('quest-word').className = 'quest-input word';
+    }, 800);
+  }
+}
+
+function nextQuest() {
+  questIdx++;
+  renderQuest();
+}
+
+// ============================================================
+// CONJUGATION
+// ============================================================
+function showConjugation() {
+  const grid = document.getElementById('conj-grid');
+  grid.innerHTML = VERBS.map((v, i) => `
+    <div class="conj-verb-card" onclick="showConjTable(${i})">
+      <div class="verb-fr">${v.fr}</div>
+      <div class="verb-ru">${v.ru}</div>
+    </div>
+  `).join('');
+  showScreen('screen-conjugation');
+  buildBreadcrumb([
+    { label: '🏠 Главная', fn: 'goHome()' },
+    { label: 'Спряжение глаголов' }
+  ]);
+}
+
+function showConjTable(idx) {
+  const v = VERBS[idx];
+  document.getElementById('conj-verb-title').textContent = v.fr + ' — ' + v.ru;
+  const tbody = document.getElementById('conj-tbody');
+  tbody.innerHTML = v.forms.map(f => `
+    <tr>
+      <td class="pronoun">${f.pro}</td>
+      <td class="form">${f.form}</td>
+    </tr>
+  `).join('');
+  showScreen('screen-conj-table');
+  buildBreadcrumb([
+    { label: '🏠 Главная', fn: 'goHome()' },
+    { label: 'Спряжение', fn: 'showConjugation()' },
+    { label: v.fr }
+  ]);
+}
+
+// ============================================================
+// SPEECH
+// ============================================================
+function speakWord(text) {
+  if (!('speechSynthesis' in window)) {
+    showToast('Синтез речи не поддерживается браузером', 'error'); return;
+  }
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'fr-FR';
+  const voices = window.speechSynthesis.getVoices();
+  const frVoice = voices.find(v => v.lang.startsWith('fr'));
+  if (frVoice) utter.voice = frVoice;
+  utter.rate = 0.85;
+  window.speechSynthesis.speak(utter);
+}
+
+// Make sure voices are loaded
+window.speechSynthesis && window.speechSynthesis.addEventListener('voiceschanged', () => {});
+
+// ============================================================
+// GAME: НАЗОВИ СЛОВО (Speech Recognition)
+// ============================================================
+let speakWords = [], speakIdx = 0, speakScore = 0;
+let speakRecognition = null, speakListening = false;
+
+function showGameSpeak() {
+  speakWords = [...getLearnWords(currentLesson)].sort(() => Math.random() - .5);
+  speakIdx = 0; speakScore = 0;
+  renderSpeakCard();
+  showScreen('screen-game-speak');
+  buildBreadcrumb([
+    { label: '🏠 Главная', fn: 'goHome()' },
+    { label: currentLesson.fr, fn: `showLessonMenu(${currentLesson.id})` },
+    { label: 'Jouer', fn: 'showGameMenu()' },
+    { label: 'Назови слово' }
+  ]);
+}
+
+function renderSpeakCard() {
+  stopSpeakRecognition();
+
+  if (speakIdx >= speakWords.length) {
+    // Финиш
+    document.getElementById('speak-img').innerHTML = `<span style="font-size:4rem">🏆</span>`;
+    document.getElementById('speak-score').textContent = `Результат: ${speakScore} / ${speakWords.length}`;
+    document.getElementById('speak-hint').style.display = 'none';
+    document.getElementById('speak-recognised').textContent = '';
+    document.getElementById('speak-status').textContent = '';
+    document.getElementById('speak-mic-btn').style.display = 'none';
+    document.getElementById('speak-next-btn').style.display = 'none';
+    document.getElementById('speak-skip-btn').textContent = '🔄 Заново';
+    document.getElementById('speak-skip-btn').onclick = showGameSpeak;
+    return;
+  }
+
+  const w = speakWords[speakIdx];
+  const origIdx = currentLesson.words.indexOf(w);
+  const key = imgKey(currentLesson.id, origIdx);
+  const imgSrc = wordImages[key];
+  const imgEl = document.getElementById('speak-img');
+  imgEl.innerHTML = imgSrc
+    ? `<img src="${imgSrc}" alt="" style="width:100%;height:100%;object-fit:cover;">`
+    : `<span style="font-size:5rem">${w.emoji}</span>`;
+
+  document.getElementById('speak-score').textContent =
+    `Слово ${speakIdx + 1} из ${speakWords.length} | Очки: ${speakScore}`;
+  document.getElementById('speak-hint').style.display = 'none';
+  document.getElementById('speak-recognised').textContent = '';
+  document.getElementById('speak-status').textContent = 'Нажми 🎤 и назови слово по-французски';
+  document.getElementById('speak-mic-btn').style.display = 'flex';
+  document.getElementById('speak-mic-btn').style.background = 'var(--blue)';
+  document.getElementById('speak-next-btn').style.display = 'none';
+  document.getElementById('speak-skip-btn').textContent = 'Пропустить ⏭';
+  document.getElementById('speak-skip-btn').onclick = speakSkip;
+}
+
+function startSpeakRecognition() {
+  if (speakListening) { stopSpeakRecognition(); return; }
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SpeechRecognition) {
+    showToast('Распознавание речи не поддерживается браузером', 'error'); return;
+  }
+
+  speakRecognition = new SpeechRecognition();
+  speakRecognition.lang = 'fr-FR';
+  speakRecognition.interimResults = false;
+  speakRecognition.maxAlternatives = 5;
+
+  speakListening = true;
+  const btn = document.getElementById('speak-mic-btn');
+  btn.style.background = 'var(--red)';
+  btn.innerHTML = '⏹';
+  document.getElementById('speak-status').textContent = 'Слушаю...';
+  document.getElementById('speak-recognised').textContent = '';
+
+  speakRecognition.onresult = (e) => {
+    speakListening = false;
+    btn.style.background = 'var(--blue)';
+    btn.innerHTML = '🎤';
+
+    // Collect all alternatives
+    const alternatives = [];
+    for (let i = 0; i < e.results[0].length; i++) {
+      alternatives.push(e.results[0][i].transcript.trim().toLowerCase());
+    }
+    const heard = alternatives[0];
+    document.getElementById('speak-recognised').textContent = `Распознано: «${heard}»`;
+
+    const w = speakWords[speakIdx];
+    const target = w.word.toLowerCase();
+
+    // Check: any alternative matches the target word (ignoring articles)
+    const isCorrect = alternatives.some(alt => {
+      const parts = alt.split(/\s+/);
+      return parts.some(p => p === target) || alt === target || alt === w.fr.toLowerCase();
+    });
+
+    if (isCorrect) {
+      speakScore++;
+      document.getElementById('speak-status').textContent = '✅ Верно! Bravo!';
+      showToast('Correct ! 🎉');
+      setTimeout(() => { speakIdx++; renderSpeakCard(); }, 1100);
+    } else {
+      // Wrong: show hint and speak the word
+      document.getElementById('speak-status').textContent = '❌ Не совсем. Правильно:';
+      showSpeakHint();
+      speakWordFR(w.fr);
+    }
+  };
+
+  speakRecognition.onerror = (e) => {
+    speakListening = false;
+    btn.style.background = 'var(--blue)';
+    btn.innerHTML = '🎤';
+    if (e.error === 'no-speech') {
+      document.getElementById('speak-status').textContent = 'Не услышал. Попробуй ещё раз.';
+    } else if (e.error === 'not-allowed') {
+      document.getElementById('speak-status').textContent = 'Нет доступа к микрофону.';
+      showToast('Разреши доступ к микрофону', 'error');
+    } else {
+      document.getElementById('speak-status').textContent = 'Ошибка. Попробуй ещё раз.';
+    }
+  };
+
+  speakRecognition.onend = () => {
+    if (speakListening) {
+      speakListening = false;
+      btn.style.background = 'var(--blue)';
+      btn.innerHTML = '🎤';
+    }
+  };
+
+  speakRecognition.start();
+}
+
+function stopSpeakRecognition() {
+  if (speakRecognition) { try { speakRecognition.abort(); } catch(e){} speakRecognition = null; }
+  speakListening = false;
+  const btn = document.getElementById('speak-mic-btn');
+  if (btn) { btn.style.background = 'var(--blue)'; btn.innerHTML = '🎤'; }
+}
+
+function showSpeakHint() {
+  const w = speakWords[speakIdx];
+  document.getElementById('speak-hint-fr').textContent = w.fr;
+  document.getElementById('speak-hint-ru').textContent = w.ru;
+  document.getElementById('speak-hint').style.display = 'block';
+  document.getElementById('speak-next-btn').style.display = 'inline-flex';
+}
+
+function speakNext() {
+  speakIdx++;
+  renderSpeakCard();
+}
+
+function speakSkip() {
+  // Show hint for skipped word, then move on
+  showSpeakHint();
+  speakWordFR(speakWords[speakIdx].fr);
+  document.getElementById('speak-status').textContent = 'Пропущено. Запомни это слово!';
+  document.getElementById('speak-next-btn').style.display = 'inline-flex';
+  document.getElementById('speak-skip-btn').style.display = 'none';
+}
+
+function speakWordFR(text) {
+  if (!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel();
+  const utter = new SpeechSynthesisUtterance(text);
+  utter.lang = 'fr-FR';
+  const voices = window.speechSynthesis.getVoices();
+  const frVoice = voices.find(v => v.lang.startsWith('fr'));
+  if (frVoice) utter.voice = frVoice;
+  utter.rate = 0.8;
+  window.speechSynthesis.speak(utter);
+}
+
+// ============================================================
+// INIT
+// ============================================================
+goHome();
+</script>
+</body>
+</html>
